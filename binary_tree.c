@@ -167,6 +167,49 @@ node* minSheet(node *root){
 }
 
 
+int highNode(node *root){
+
+    int heighLeft, heighRight;
+
+    heighLeft = 0 ;
+    heighRight = 0;
+
+
+    
+    if(root)
+    {
+        if(root->right){
+            
+            heighRight = highNode(root->right);
+            heighRight++;
+        }    
+         
+        if(root->left){
+            
+            heighLeft = highNode(root->left);
+            heighLeft++; 
+        }
+    
+
+    }
+
+
+    if(heighLeft>heighRight){
+        
+        return heighLeft;
+    }
+    else if(heighRight>heighLeft)
+    {
+
+        return heighRight;
+
+    }
+    else{
+
+        return heighLeft;
+    }
+}
+
 
 void removeItemBinaryTree(binaryTree *B , int item){
 
@@ -337,7 +380,7 @@ void printBinaryTree(binaryTree *B){
 
 int main(){
 
-    int V[]={6,5,5,2,7,8};
+    int V[]={6,5,5,2,7,8,10,9};
 
     int N = (int) sizeof(V)/4;
 
@@ -359,13 +402,17 @@ int main(){
 
     printf("\n\nMax = %d |Min %d \n ", max->value, min->value);
 
-    removeItemBinaryTree(&B,6);
+    //removeItemBinaryTree(&B,6);
     //removeItemBinaryTree(&B, 5);
     //removeItemBinaryTree(&B,2);
     //removeItemBinaryTree(&B,5);
     //removeItemBinaryTree(&B,7);
 
-    printBinaryTree(&B);
+    //printBinaryTree(&B);
+
+    printf("H = %d \n", highNode(B.root));
+    
+    clearBinaryTree(&B);
 }
 
 
